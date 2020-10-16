@@ -5,7 +5,8 @@ let init = [{ name: 'chapter1', ready: false, subchapters: [{ name: 'subchapter1
 export const chapter = function (state = init, action) {
   switch (action.type) {
     case chaptersAction.CHANGE_STATUS:
-      return state.map(item => {
+
+      const updatedState = state.map(item => {
 
         if (item => item.name === action.parent) {
 
@@ -20,13 +21,7 @@ export const chapter = function (state = init, action) {
               return subchapter
             });
 
-            const haveUnready = subchapters.find(item => item.ready === false);
-
-            if (haveUnready) {
-              item.ready = false;
-            } else {
-              item.ready = true;
-            }
+            item.ready = !!subchapters.find(item => item.ready === false)
 
           }
 
@@ -35,22 +30,22 @@ export const chapter = function (state = init, action) {
         }
 
         return item;
-      })
+      });
+
+
+      return [...updatedState]
 
 
     case chaptersAction.ADD_CHAPTER:
       return [...state, { name: action.name, ready: false, subchapters: [] }]
     case chaptersAction.ADD_SUB_CHAPTER:
-      const res =
-        state.map(item => {
-          if (item.name === action.parentName) {
-            return { ...item, subchapters: [...item.subchapters, { name: action.name, ready: false }] }
-          } else {
-            return item;
-          }
-        })
-
-      return res;
+      return state.map(item => {
+        if (item.name === action.parentName) {
+          return { ...item, subchapters: [...item.subchapters, { name: action.name, ready: false }] }
+        } else {
+          return item;
+        }
+      })
 
     default:
       return state
