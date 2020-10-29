@@ -1,0 +1,3 @@
+export const ADD_CHAPTER = 'ADD_CHAPTER';
+export const ADD_SUB_CHAPTER = 'ADD_SUB_CHAPTER';
+export const CHANGE_STATUS = 'CHANGE_STATUS';
