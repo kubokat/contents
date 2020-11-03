@@ -7,7 +7,7 @@ function addSubChapter({ chapters,addSubChapter }) {
         onSubmit={
           (e) => {
             e.preventDefault();
-            addSubChapter(e.target.parent.value, e.target.name.value);
+            addSubChapter({parent: e.target.parent.value, name: e.target.name.value});
             e.target.name.value = '';
           }
         }>

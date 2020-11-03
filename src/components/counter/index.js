@@ -3,7 +3,7 @@ import Counter from './Counter';
 
 const mapStateToProps = (state) => {
 
-  let count = state.chapter.reduce((a, b) => {
+  let count = state.chapter.present.reduce((a, b) => {
     const subLength = b.subchapters.length;
     const subReadyLength = b.subchapters.filter(item => item.ready === true).length;
 

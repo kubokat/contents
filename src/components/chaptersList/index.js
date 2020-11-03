@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import ChaptersList from './ChaptersList';
+import { ActionCreators } from 'redux-undo';
 
 const filters = {
   SHOW_ALL: () => true,
@@ -8,7 +9,13 @@ const filters = {
 }
 
 const mapStateToProps = (state) => {
-  return { chapters: state.chapter.filter(filters[state.filter]) }
+  return { 
+    chapters: state.chapter.present.filter(filters[state.filter]),
+  }
 }
 
-export default connect(mapStateToProps)(ChaptersList);
+const mapDispatchToProps = (dispatch) => ({
+  undo: () => dispatch(ActionCreators.undo())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChaptersList);
