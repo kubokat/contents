@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import SubChapter from './SubChapter'
-import { changeStatus } from '../../redux/actions/chapters';
+import { changeStatus } from '../../redux/slices/chapters';
 
 const mapDispatchToProps = (dispatch) => ({
-  changeStatus: (name, parent) => dispatch(changeStatus(name, parent))
+  changeStatus: (payload) => dispatch(changeStatus(payload))
 });
 
 const mapStateToProps = (state) => {
-  return { chapters: state.chapter }
+  return { chapters: state.chapter.present }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubChapter);
